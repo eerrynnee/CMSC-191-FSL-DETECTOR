@@ -1,0 +1,190 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap");
+
+
+h1,
+h2,
+h3 {
+  font-family: "Poppins", sans-serif !important;
+  letter-spacing: -0.5px;
+}
+
+body,
+p,
+div,
+span,
+label {
+  font-family: "Inter", sans-serif !important;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+
+.stApp {
+  background-color: #0e1117;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.stApp .main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fsl-header {
+  background: linear-gradient(135deg, #1a1f2e 0%, #0e1117 100%);
+  border-bottom: 2px solid #4f7eff;
+  margin-bottom: 24px;
+  border-radius: 0 0 12px 12px;
+}
+
+.fsl-header-bleed {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: linear-gradient(135deg, #1a1f2e 0%, #0e1117 100%);
+  border-bottom: 2px solid #4f7eff;
+}
+
+.fsl-header {
+  max-width: 1200px;
+  margin: 0 auto 24px auto;
+  padding: 16px 24px;
+}
+
+.fsl-header h1 {
+  color: #f0f2f6;
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+.fsl-header p {
+  color: #8892a4;
+  font-size: 0.95rem;
+  margin: 4px 0 0 0;
+}
+
+/* Detection results card */
+.result-card {
+  background-color: #1a1f2e;
+  border: 1px solid #2d3446;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+/* Detected label display */
+.gesture-label {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffd166;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 16px 0;
+}
+
+/* Status badge */
+.status-active {
+  display: inline-block;
+  background-color: #1e3a2f;
+  color: #4caf50;
+  border: 1px solid #4caf50;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-waiting {
+  display: inline-block;
+  background-color: #2d2a1a;
+  color: #ffd166;
+  border: 1px solid #ffd166;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.fsl-footer-bleed {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: #1a1f2e;
+  border-top: 1px solid #2d3446;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.fsl-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+  text-align: center;
+}
+
+.fsl-footer > div {
+  min-width: 0;
+}
+
+.fsl-footer h4 {
+  color: #f0f2f6;
+  font-family: "Poppins", sans-serif;
+  margin: 0 0 10px 0;
+}
+
+.fsl-footer p {
+  margin: 0;
+  color: #d7deea;
+  line-height: 1.6;
+}
+
+/* Mode toggle styling */
+.stRadio > label {
+  color: #f0f2f6 !important;
+}
+
+/* Progress bar for confidence */
+.stProgress > div > div {
+  background-color: #4f7eff !important;
+}
+
+/* Remove default Streamlit padding on main block */
+.block-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  max-width: 1200px;
+  min-height: 100vh;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.fsl-footer-bleed {
+  margin-top: auto;
+}
+
+/* Image display border */
+.stImage > img {
+  border-radius: 10px;
+  border: 1px solid #2d3446;
+}
