@@ -169,9 +169,8 @@ with left_col:
     # Voice toggle (Tagalog)
     st.checkbox("Enable voice (Tagalog)", value=st.session_state.get("voice_enabled", True), key="voice_enabled")
 
-    RTC_CONFIG = RTCConfiguration(
-        {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
-    )
+    # Keep ICE config empty to avoid external STUN retries that can crash on hosted environments.
+    RTC_CONFIG = RTCConfiguration({"iceServers": []})
 
     class FSLVideoProcessor(VideoProcessorBase):
         def __init__(self):
