@@ -262,60 +262,6 @@ with left_col:
                             st.session_state["last_spoken_label"] = display_label
                             st.session_state["last_spoken_time"] = now
 
-    # Fallback snapshot camera — works without WebRTC, STUN, or TURN
-    # Shown only when the WebRTC stream is not currently active
-    if not st.session_state.get("webcam_active", False):
-        st.markdown("---")
-        st.caption("WebRTC unavailable on your network? Use the snapshot camera below.")
-
-        camera_frame = st.camera_input(
-            label="Snapshot camera",
-            label_visibility="collapsed",
-        )
-
-        if camera_frame is not None:
-            # Convert browser-captured frame to BGR numpy array for OpenCV
-            pil_image = Image.open(camera_frame)
-            bgr_image = pil_to_bgr(pil_image)
-            bgr_resized = resize_for_inference(bgr_image)
-
-            # Run the full CV pipeline identical to the webcam path
-            annotated, hand_crop = preprocess(bgr_resized)
-
-            if hand_crop is not None and hand_crop.size > 0:
-                predictions = run_inference(hand_crop)
-            else:
-                predictions = []
-                st.warning("No hand detected. Try better lighting or move your hand closer.")
-
-            # Retrieve or create a persistent smoother for snapshot mode
-            if "snap_smoother" not in st.session_state:
-                st.session_state["snap_smoother"] = PredictionSmoother(buffer_size=5)
-            snap_smoother = st.session_state["snap_smoother"]
-
-            if predictions:
-                top = predictions[0]
-                smoothed = snap_smoother.smooth(top["class"], top["confidence"])
-                update_results(smoothed, top["confidence"], True)
-
-                # Speak the detected sign if voice is enabled
-                if st.session_state.get("voice_enabled", True):
-                    now = time.time()
-                    cooldown = float(st.session_state.get("tts_cooldown_seconds", 5.0))
-                    last_spoken_time = float(st.session_state.get("last_spoken_time", 0.0))
-                    if now - last_spoken_time >= cooldown:
-                        filipino = translate_label(smoothed).split(" (")[0]
-                        if filipino and filipino != "?":
-                            speak_filipino(filipino)
-                            st.session_state["last_spoken_label"] = smoothed
-                            st.session_state["last_spoken_time"] = now
-            else:
-                update_results(snap_smoother.stable_label, 0.0, False)
-
-            # Draw bounding box and label on the annotated frame and display
-            final = draw_predictions(annotated, predictions, snap_smoother.stable_label)
-            st.image(bgr_to_rgb(final), use_container_width=True)
-
 st.markdown(
     """
     <div class="fsl-footer-bleed">
