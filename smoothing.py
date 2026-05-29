@@ -1,10 +1,10 @@
 from collections import deque
 
 # Confidence threshold below which we ignore a prediction
-CONF_THRESHOLD = 0.35
+CONF_THRESHOLD = 0.40 
 
 # How many frames must agree before we commit to a new stable label
-STABLE_THRESHOLD = 6
+STABLE_THRESHOLD = 4
 
 
 class PredictionSmoother:
@@ -16,7 +16,7 @@ class PredictionSmoother:
     Only commits to a new label after STABLE_THRESHOLD consecutive agreements.
     """
 
-    def __init__(self, buffer_size=10):
+    def __init__(self, buffer_size=7):
         self._buffer = deque(maxlen=buffer_size)
         self._stable_label = "?"
         self._stable_count = 0

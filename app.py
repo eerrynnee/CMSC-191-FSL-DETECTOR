@@ -7,10 +7,10 @@ from streamlit_webrtc import RTCConfiguration, VideoProcessorBase, webrtc_stream
 from streamlit_autorefresh import st_autorefresh
 
 from drawing import draw_predictions
-from predict import run_inference
+from predict import run_inference, MIN_CONFIDENCE
 from inference_worker import start_worker, submit_frame, get_latest_predictions
 from preprocess import preprocess
-from smoothing import PredictionSmoother
+from smoothing import PredictionSmoother, CONF_THRESHOLD
 from utils.image_utils import resize_for_inference
 import tempfile
 import os
@@ -52,7 +52,7 @@ def update_results(label: str, confidence: float, detected: bool) -> None:
     st.session_state.detected_label = label
     st.session_state.detection_confidence = confidence
     # Consider a detection active if confidence exceeds a reasonable threshold
-    detected_flag = confidence > 0.20
+    detected_flag = confidence > MIN_CONFIDENCE
     st.session_state.has_detection = detected_flag
     if detected_flag:
         st.session_state.detection_count = st.session_state.get("detection_count", 0) + 1
@@ -252,10 +252,10 @@ with left_col:
             proc_conf = getattr(processor, "result_confidence", 0.0)
 
             # Use raw prediction for display if it has reasonable confidence
-            display_label = proc_raw_label if proc_raw_conf > 0.0 else proc_label
-            display_conf = proc_raw_conf if proc_raw_conf > 0.0 else proc_conf
+            display_label = proc_raw_label if proc_raw_conf > CONF_THRESHOLD else proc_label
+            display_conf = proc_raw_conf if proc_raw_conf > CONF_THRESHOLD else proc_conf
 
-            update_results(display_label, display_conf, display_conf > 0.20)
+            update_results(display_label, display_conf, display_conf > MIN_CONFIDENCE)
             st.session_state.detection_count = getattr(processor, "result_detection_count", st.session_state.detection_count)
 
             # Speak every detected sign when confidence is above the detection threshold and voice is enabled
