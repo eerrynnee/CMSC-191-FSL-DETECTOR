@@ -69,7 +69,7 @@ def translate_label(label: str) -> str:
         return "Paalam (Goodbye)"
     elif label == "hello":
         return "Kumusta (hello)"
-    elif label == "how are you":
+    elif label == "how-are-you":
         return "Kumusta ka? (How are you)"
     elif label == "i-love-you":
         return "Mahal kita (I love you)"
