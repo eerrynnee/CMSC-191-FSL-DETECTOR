@@ -69,11 +69,11 @@ def translate_label(label: str) -> str:
         return "Paalam (Goodbye)"
     elif label == "hello":
         return "Kumusta (hello)"
-    elif label == "how-are-you":
+    elif label == "how are you":
         return "Kumusta ka? (How are you)"
-    elif label == "i-love-you":
+    elif label == "i love you":
         return "Mahal kita (I love you)"
-    elif label == "i'm-fine":
+    elif label == "i'm fine":
         return "Ayos lang ako (I'm fine)"
     elif label == "nice to meet you":
         return "Ikinagagalak kong makilala ka (Nice to meet you)"
@@ -83,9 +83,9 @@ def translate_label(label: str) -> str:
         return "Paumanhin (Sorry)"
     elif label == "thank-you":
         return "Salamat (Thank you)"
-    elif label == "what's-your-name":
+    elif label == "what's your name":
         return "Anong pangalan mo? (What's your name?)"
-    elif label == "youre-welcome":
+    elif label == "youre welcome":
         return "Walang anuman (You're welcome)"
     else:
         return f"{label} (translation unavailable)"
