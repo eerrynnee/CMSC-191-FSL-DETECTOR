@@ -16,7 +16,7 @@ class PredictionSmoother:
     Only commits to a new label after STABLE_THRESHOLD consecutive agreements.
     """
 
-    def __init__(self, buffer_size=5):
+    def __init__(self, buffer_size=10):
         self._buffer = deque(maxlen=buffer_size)
         self._stable_label = "?"
         self._stable_count = 0
